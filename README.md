@@ -1,4 +1,4 @@
-# SignVoice - Real-Time Sign Language Interpreter
+# UnMute - Real-Time Sign Language Interpreter
 
 A mobile app that acts as a personal sign language interpreter, enabling seamless two-way communication between deaf and hearing individuals during meetings.
 
