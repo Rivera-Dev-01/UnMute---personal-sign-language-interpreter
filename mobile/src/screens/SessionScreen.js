@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CameraView } from 'expo-camera';
 import SignRecognition from '../components/SignRecognition';
 import SpeechInput from '../components/SpeechInput';
 import ConversationThread from '../components/ConversationThread';
 import { controlColors } from '../utils/theme';
+
+const logo = require('../logo_UnMute.jpg-.png');
 
 // ViewfinderOverlay — four purple corner brackets positioned absolutely
 function ViewfinderOverlay() {
@@ -116,6 +118,7 @@ export default function SessionScreen({ route, navigation }) {
         </TouchableOpacity>
 
         <View style={styles.headerCenter}>
+          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
           <Text style={styles.headerTitle}>{signLanguage} → {outputLanguage}</Text>
           <View style={styles.liveRow}>
             <View style={styles.liveDot} />
@@ -200,6 +203,11 @@ const styles = StyleSheet.create({
   headerCenter: {
     flex: 1,
     alignItems: 'center',
+  },
+  logoImage: {
+    width: 110,
+    height: 40,
+    marginBottom: 2,
   },
   headerTitle: {
     fontSize: 20,

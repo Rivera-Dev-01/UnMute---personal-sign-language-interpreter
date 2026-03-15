@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Animated, StyleSheet } from 'react-native';
+import { View, Text, Animated, Image, StyleSheet } from 'react-native';
+
+const logo = require('../logo_UnMute.jpg-.png');
 
 export default function SplashScreen({ navigation }) {
   // Three dot animation values
@@ -34,10 +36,7 @@ export default function SplashScreen({ navigation }) {
   return (
     <View style={styles.container}>
       {/* Logo */}
-      <View style={styles.logoRow}>
-        <Text style={styles.logoUn}>Un</Text>
-        <Text style={styles.logoMute}>Mute</Text>
-      </View>
+      <Image source={logo} style={styles.logoImage} resizeMode="contain" />
 
       {/* Tagline */}
       <Text style={styles.tagline}>Bridging silence and sound</Text>
@@ -59,22 +58,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logoRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
+  logoImage: {
+    width: 180,
+    height: 80,
     marginBottom: 12,
-  },
-  logoUn: {
-    color: '#ffffff',
-    fontSize: 20,
-    fontFamily: 'Inter_700Bold',
-    fontWeight: 'bold',
-  },
-  logoMute: {
-    color: '#7c3aed',
-    fontSize: 20,
-    fontFamily: 'Inter_700Bold',
-    fontWeight: 'bold',
   },
   tagline: {
     color: '#71717a',

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
+  Image,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
@@ -10,6 +11,8 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { ThemeContext } from '../utils/ThemeContext';
 import { typography } from '../utils/theme';
+
+const logo = require('../logo_UnMute.jpg-.png');
 
 export const LANGUAGE_COMBOS = [
   { signLanguage: 'FSL', outputLanguage: 'Tagalog', label: 'FSL → Tagalog', flags: '🇵🇭🇵🇭' },
@@ -104,10 +107,8 @@ export default function HomeScreen({ navigation }) {
       >
         {/* Header */}
         <View style={styles.header}>
-          {/* UnMute logo: "Un" white + "Mute" purple */}
-          <Text style={[styles.logoText, { color: theme.primaryText }]}>
-            Un<Text style={{ color: '#7c3aed' }}>Mute</Text>
-          </Text>
+          {/* UnMute logo image */}
+          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
           <TouchableOpacity onPress={toggleTheme} style={styles.themeToggle} accessibilityLabel="Toggle theme">
             <Text style={[styles.themeIcon, { color: theme.primaryText }]}>
               {isDark ? '☀️' : '🌙'}
@@ -202,9 +203,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 24,
   },
-  logoText: {
-    fontSize: typography.appTitle,
-    fontWeight: '700',
+  logoImage: {
+    width: 130,
+    height: 48,
+    alignSelf: 'flex-start',
+    marginLeft: -20,
   },
   themeToggle: {
     padding: 8,

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import {
   View,
   Text,
+  Image,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
@@ -10,6 +11,8 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { ThemeContext } from '../utils/ThemeContext';
 import { typography } from '../utils/theme';
+
+const logo = require('../logo_UnMute.jpg-.png');
 
 const STEPS = [
   { number: 1, icon: '📱', label: 'Open the app and select your language pair' },
@@ -63,6 +66,7 @@ export default function MeetingScreen({ route, navigation }) {
         </TouchableOpacity>
 
         <View style={styles.headerCenter}>
+          <Image source={logo} style={styles.logoImage} resizeMode="contain" />
           <Text style={[styles.headerTitle, { color: theme.primaryText }]}>Meeting Companion</Text>
           <Text style={[styles.headerSubtitle, { color: theme.secondaryText }]}>
             {signLanguage} → {outputLanguage}
@@ -148,6 +152,11 @@ const styles = StyleSheet.create({
   headerCenter: {
     flex: 1,
     alignItems: 'center',
+  },
+  logoImage: {
+    width: 110,
+    height: 40,
+    marginBottom: 2,
   },
   headerTitle: {
     fontSize: typography.appTitle,

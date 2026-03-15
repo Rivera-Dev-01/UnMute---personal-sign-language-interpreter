@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 
 function ConversationBubble({ message }) {
   const isSign = message.type === 'sign';
@@ -9,19 +9,10 @@ function ConversationBubble({ message }) {
   });
 
   return (
-    <View
-      className={`mb-2 max-w-xs ${isSign ? 'self-end items-end' : 'self-start items-start'}`}
-    >
-      <View
-        style={{
-          backgroundColor: isSign ? 'rgba(59,130,246,0.12)' : 'rgba(113,113,122,0.12)',
-          borderRadius: 12,
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-        }}
-      >
-        <Text className="text-gray-900 dark:text-gray-100">{message.text}</Text>
-        <Text style={{ fontSize: 11.2, color: '#71717a', marginTop: 2 }}>{timeString}</Text>
+    <View style={[styles.bubbleRow, isSign ? styles.bubbleRowEnd : styles.bubbleRowStart]}>
+      <View style={[styles.bubble, isSign ? styles.bubbleSign : styles.bubbleSpeech]}>
+        <Text style={styles.bubbleText}>{message.text}</Text>
+        <Text style={styles.bubbleTime}>{timeString}</Text>
       </View>
     </View>
   );
@@ -29,12 +20,10 @@ function ConversationBubble({ message }) {
 
 function EmptyState() {
   return (
-    <View className="flex-1 items-center justify-center py-12">
-      <Text style={{ fontSize: 40 }}>💬</Text>
-      <Text className="text-gray-700 font-semibold mt-3 text-base">
-        Start signing or speaking
-      </Text>
-      <Text className="text-gray-400 mt-1 text-sm">Messages will appear here</Text>
+    <View style={styles.emptyState}>
+      <Text style={styles.emptyIcon}>💬</Text>
+      <Text style={styles.emptyTitle}>Start signing or speaking</Text>
+      <Text style={styles.emptySubtitle}>Messages will appear here</Text>
     </View>
   );
 }
@@ -49,12 +38,11 @@ export default function ConversationThread({ messages, onClear }) {
   }, [messages]);
 
   return (
-    <View className="flex-1">
-      {/* Section header */}
-      <View className="flex-row items-center justify-between px-4 py-2">
-        <Text className="text-gray-900 font-semibold text-base">Conversation</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Conversation</Text>
         <TouchableOpacity onPress={onClear}>
-          <Text style={{ color: '#7c3aed', fontWeight: '600' }}>Clear</Text>
+          <Text style={styles.clearButton}>Clear</Text>
         </TouchableOpacity>
       </View>
 
@@ -66,10 +54,89 @@ export default function ConversationThread({ messages, onClear }) {
           data={messages}
           keyExtractor={(_, idx) => String(idx)}
           renderItem={({ item }) => <ConversationBubble message={item} />}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 8 }}
+          contentContainerStyle={styles.listContent}
           onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: true })}
         />
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#0f0d1a',
+  },
+  clearButton: {
+    color: '#7c3aed',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  listContent: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  bubbleRow: {
+    marginBottom: 8,
+    maxWidth: '75%',
+  },
+  bubbleRowEnd: {
+    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  bubbleRowStart: {
+    alignSelf: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  bubble: {
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  bubbleSign: {
+    backgroundColor: 'rgba(59,130,246,0.12)',
+  },
+  bubbleSpeech: {
+    backgroundColor: 'rgba(113,113,122,0.12)',
+  },
+  bubbleText: {
+    fontSize: 15,
+    color: '#0f0d1a',
+  },
+  bubbleTime: {
+    fontSize: 11,
+    color: '#71717a',
+    marginTop: 2,
+  },
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 48,
+  },
+  emptyIcon: {
+    fontSize: 40,
+  },
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#3f3f46',
+    marginTop: 12,
+  },
+  emptySubtitle: {
+    fontSize: 14,
+    color: '#a1a1aa',
+    marginTop: 4,
+  },
+});
