@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { CameraView } from 'expo-camera';
 import SignRecognition from '../components/SignRecognition';
 import SpeechInput from '../components/SpeechInput';
@@ -57,7 +58,7 @@ function ControlBar({ cameraEnabled, micEnabled, speakerEnabled, onCameraToggle,
         style={[styles.controlButton, { backgroundColor: controlColors.cameraBg }]}
         accessibilityLabel="Toggle camera"
       >
-        <Text style={styles.controlIcon}>{cameraEnabled ? '📷' : '🚫'}</Text>
+        <Ionicons name={cameraEnabled ? 'camera-outline' : 'camera-off-outline'} size={22} color="#fff" />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -65,7 +66,7 @@ function ControlBar({ cameraEnabled, micEnabled, speakerEnabled, onCameraToggle,
         style={[styles.controlButton, { backgroundColor: controlColors.micBg }]}
         accessibilityLabel="Toggle microphone"
       >
-        <Text style={styles.controlIcon}>{micEnabled ? '🎤' : '🔇'}</Text>
+        <Ionicons name={micEnabled ? 'mic-outline' : 'mic-off-outline'} size={22} color="#fff" />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -73,7 +74,7 @@ function ControlBar({ cameraEnabled, micEnabled, speakerEnabled, onCameraToggle,
         style={[styles.controlButton, { backgroundColor: controlColors.speakerBg }]}
         accessibilityLabel="Toggle speaker"
       >
-        <Text style={styles.controlIcon}>{speakerEnabled ? '🔊' : '🔕'}</Text>
+        <Ionicons name={speakerEnabled ? 'volume-high-outline' : 'volume-mute-outline'} size={22} color="#fff" />
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -127,7 +128,7 @@ export default function SessionScreen({ route, navigation }) {
         </View>
 
         <TouchableOpacity style={styles.headerButton} accessibilityLabel="Settings">
-          <Text style={styles.headerButtonText}>⚙</Text>
+          <Ionicons name="settings-outline" size={22} color="#0f0d1a" />
         </TouchableOpacity>
       </View>
 
@@ -150,7 +151,7 @@ export default function SessionScreen({ route, navigation }) {
           style={styles.flipButton}
           accessibilityLabel="Flip camera"
         >
-          <Text style={styles.flipButtonText}>🔄</Text>
+          <Ionicons name="camera-reverse-outline" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
 
@@ -260,9 +261,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  flipButtonText: {
-    fontSize: 18,
-  },
   // Control Bar
   controlBar: {
     flexDirection: 'row',
@@ -279,9 +277,6 @@ const styles = StyleSheet.create({
     borderRadius: 26,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  controlIcon: {
-    fontSize: 22,
   },
   endButton: {
     paddingHorizontal: 20,

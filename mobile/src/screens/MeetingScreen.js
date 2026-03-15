@@ -9,23 +9,24 @@ import {
   StatusBar,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { ThemeContext } from '../utils/ThemeContext';
 import { typography } from '../utils/theme';
 
 const logo = require('../logo_UnMute.jpg-.png');
 
 const STEPS = [
-  { number: 1, icon: '📱', label: 'Open the app and select your language pair' },
-  { number: 2, icon: '🤟', label: 'Sign naturally in front of your camera' },
-  { number: 3, icon: '🧠', label: 'AI reads and interprets your signs in real time' },
-  { number: 4, icon: '🔊', label: 'Your phone speaks the translation aloud' },
+  { number: 1, icon: 'phone-portrait-outline', label: 'Open the app and select your language pair' },
+  { number: 2, icon: 'hand-left-outline', label: 'Sign naturally in front of your camera' },
+  { number: 3, icon: 'sparkles-outline', label: 'AI reads and interprets your signs in real time' },
+  { number: 4, icon: 'volume-high-outline', label: 'Your phone speaks the translation aloud' },
 ];
 
 const HOW_IT_WORKS = [
-  { label: 'You Sign', icon: '🤟' },
-  { label: 'AI Reads', icon: '🧠' },
-  { label: 'Phone Speaks', icon: '📢' },
-  { label: 'They Hear', icon: '👂' },
+  { label: 'You Sign', icon: 'hand-left-outline' },
+  { label: 'AI Reads', icon: 'sparkles-outline' },
+  { label: 'Phone Speaks', icon: 'volume-high-outline' },
+  { label: 'They Hear', icon: 'ear-outline' },
 ];
 
 function StepItem({ step, theme }) {
@@ -34,7 +35,7 @@ function StepItem({ step, theme }) {
       <View style={[styles.stepNumberBadge, { backgroundColor: theme.accentPurple ?? '#7c3aed' }]}>
         <Text style={styles.stepNumber}>{step.number}</Text>
       </View>
-      <Text style={styles.stepIcon}>{step.icon}</Text>
+      <Ionicons name={step.icon} size={20} color={theme.secondaryText} />
       <Text style={[styles.stepLabel, { color: theme.primaryText }]}>{step.label}</Text>
     </View>
   );
@@ -74,7 +75,7 @@ export default function MeetingScreen({ route, navigation }) {
         </View>
 
         <TouchableOpacity style={styles.headerButton} accessibilityLabel="Settings">
-          <Text style={[styles.headerButtonText, { color: theme.primaryText }]}>⚙</Text>
+          <Ionicons name="settings-outline" size={22} color={theme.primaryText} />
         </TouchableOpacity>
       </View>
 
@@ -85,7 +86,7 @@ export default function MeetingScreen({ route, navigation }) {
       >
         {/* Setup Guide Illustration */}
         <View style={[styles.illustrationContainer, { backgroundColor: theme.cardBg, borderColor: theme.cardBorder }]}>
-          <Text style={styles.illustrationEmoji}>🤝</Text>
+          <Ionicons name="people-outline" size={72} color="#7c3aed" style={{ opacity: 0.25 }} />
           <View style={styles.illustrationOverlay}>
             <Text style={styles.illustrationOverlayText}>Setup Guide</Text>
             <Text style={styles.illustrationOverlayDesc}>
@@ -106,7 +107,7 @@ export default function MeetingScreen({ route, navigation }) {
           {HOW_IT_WORKS.map((item, index) => (
             <React.Fragment key={item.label}>
               <View style={styles.flowStep}>
-                <Text style={styles.flowIcon}>{item.icon}</Text>
+                <Ionicons name={item.icon} size={22} color="#7c3aed" style={{ marginBottom: 4 }} />
                 <Text style={[styles.flowLabel, { color: theme.primaryText }]}>{item.label}</Text>
               </View>
               {index < HOW_IT_WORKS.length - 1 && (
@@ -183,9 +184,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     position: 'relative',
   },
-  illustrationEmoji: {
-    fontSize: 72,
-  },
   illustrationOverlay: {
     position: 'absolute',
     bottom: 0,
@@ -232,9 +230,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
-  stepIcon: {
-    fontSize: 20,
-  },
   stepLabel: {
     flex: 1,
     fontSize: typography.subtitle,
@@ -251,10 +246,6 @@ const styles = StyleSheet.create({
   flowStep: {
     alignItems: 'center',
     flex: 1,
-  },
-  flowIcon: {
-    fontSize: 22,
-    marginBottom: 4,
   },
   flowLabel: {
     fontSize: typography.caption,

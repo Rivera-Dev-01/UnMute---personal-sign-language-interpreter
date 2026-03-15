@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 function ConversationBubble({ message }) {
   const isSign = message.type === 'sign';
@@ -21,7 +22,7 @@ function ConversationBubble({ message }) {
 function EmptyState() {
   return (
     <View style={styles.emptyState}>
-      <Text style={styles.emptyIcon}>💬</Text>
+      <Ionicons name="chatbubbles-outline" size={40} color="#a1a1aa" />
       <Text style={styles.emptyTitle}>Start signing or speaking</Text>
       <Text style={styles.emptySubtitle}>Messages will appear here</Text>
     </View>
@@ -124,9 +125,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 48,
-  },
-  emptyIcon: {
-    fontSize: 40,
   },
   emptyTitle: {
     fontSize: 16,

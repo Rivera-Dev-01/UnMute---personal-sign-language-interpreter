@@ -9,16 +9,17 @@ import {
   StatusBar,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { ThemeContext } from '../utils/ThemeContext';
 import { typography } from '../utils/theme';
 
 const logo = require('../logo_UnMute.jpg-.png');
 
 export const LANGUAGE_COMBOS = [
-  { signLanguage: 'FSL', outputLanguage: 'Tagalog', label: 'FSL → Tagalog', flags: '🇵🇭🇵🇭' },
-  { signLanguage: 'FSL', outputLanguage: 'English', label: 'FSL → English', flags: '🇵🇭🇬🇧' },
-  { signLanguage: 'ASL', outputLanguage: 'English', label: 'ASL → English', flags: '🇺🇸🇬🇧' },
-  { signLanguage: 'ASL', outputLanguage: 'Tagalog', label: 'ASL → Tagalog', flags: '🇺🇸🇵🇭' },
+  { signLanguage: 'FSL', outputLanguage: 'Tagalog', label: 'FSL → Tagalog' },
+  { signLanguage: 'FSL', outputLanguage: 'English', label: 'FSL → English' },
+  { signLanguage: 'ASL', outputLanguage: 'English', label: 'ASL → English' },
+  { signLanguage: 'ASL', outputLanguage: 'Tagalog', label: 'ASL → Tagalog' },
 ];
 
 function LanguageComboCard({ combo, selected, onPress, theme }) {
@@ -36,7 +37,7 @@ function LanguageComboCard({ combo, selected, onPress, theme }) {
       accessibilityLabel={combo.label}
       accessibilityRole="button"
     >
-      <Text style={styles.comboFlags}>{combo.flags}</Text>
+      <Ionicons name="language-outline" size={20} color={selected ? '#7c3aed' : theme.secondaryText} style={styles.comboIcon} />
       <View style={styles.comboLabelRow}>
         <Text style={[styles.comboLangText, { color: theme.primaryText }]}>{combo.signLanguage}</Text>
         <Text style={[styles.comboArrow, { color: theme.secondaryText }]}>→</Text>
@@ -57,7 +58,7 @@ function FeatureCard({ icon, title, theme }) {
         },
       ]}
     >
-      <Text style={styles.featureIcon}>{icon}</Text>
+      <Ionicons name={icon} size={20} color="#7c3aed" style={styles.featureIcon} />
       <Text style={[styles.featureTitle, { color: theme.primaryText }]}>{title}</Text>
     </View>
   );
@@ -110,9 +111,11 @@ export default function HomeScreen({ navigation }) {
           {/* UnMute logo image */}
           <Image source={logo} style={styles.logoImage} resizeMode="contain" />
           <TouchableOpacity onPress={toggleTheme} style={styles.themeToggle} accessibilityLabel="Toggle theme">
-            <Text style={[styles.themeIcon, { color: theme.primaryText }]}>
-              {isDark ? '☀️' : '🌙'}
-            </Text>
+            <Ionicons
+              name={isDark ? 'sunny-outline' : 'moon-outline'}
+              size={20}
+              color={theme.primaryText}
+            />
           </TouchableOpacity>
         </View>
 
@@ -172,10 +175,10 @@ export default function HomeScreen({ navigation }) {
         </Text>
         <View style={styles.featureGrid}>
           {[
-            { icon: '🎙️', title: 'Live Recognition' },
-            { icon: '💬', title: 'Two-Way Chat' },
-            { icon: '🤝', title: 'Meeting Mode' },
-            { icon: '🧠', title: 'Context Aware' },
+            { icon: 'mic-outline', title: 'Live Recognition' },
+            { icon: 'chatbubbles-outline', title: 'Two-Way Chat' },
+            { icon: 'people-outline', title: 'Meeting Mode' },
+            { icon: 'bulb-outline', title: 'Context Aware' },
           ].map((feature) => (
             <FeatureCard key={feature.title} icon={feature.icon} title={feature.title} theme={theme} />
           ))}
@@ -212,9 +215,6 @@ const styles = StyleSheet.create({
   themeToggle: {
     padding: 8,
   },
-  themeIcon: {
-    fontSize: 20,
-  },
   subtitle: {
     fontSize: typography.subtitle,
     marginBottom: 6,
@@ -235,8 +235,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
   },
-  comboFlags: {
-    fontSize: 20,
+  comboIcon: {
     marginBottom: 8,
   },
   comboLabelRow: {
@@ -293,7 +292,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   featureIcon: {
-    fontSize: 20,
     marginBottom: 6,
   },
   featureTitle: {
