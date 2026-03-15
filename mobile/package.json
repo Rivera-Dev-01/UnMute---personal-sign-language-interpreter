@@ -1,0 +1,22 @@
+{
+  "name": "signvoice-mobile",
+  "version": "1.0.0",
+  "main": "src/App.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-native": "^0.73.0",
+    "nativewind": "^2.0.11",
+    "expo": "~50.0.0",
+    "expo-camera": "~14.0.0",
+    "expo-av": "~13.10.0",
+    "expo-speech": "~11.7.0",
+    "axios": "^1.6.0",
+    "@react-navigation/native": "^6.1.0",
+    "@react-navigation/stack": "^6.3.0"
+  }
+}
