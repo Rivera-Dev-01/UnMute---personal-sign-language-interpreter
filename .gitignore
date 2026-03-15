@@ -28,6 +28,7 @@ yarn-error.log*
 .env.local
 
 # AI Models
+*.pkl
 *.h5
 *.pb
 *.ckpt
